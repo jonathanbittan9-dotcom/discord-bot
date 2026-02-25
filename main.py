@@ -45,6 +45,7 @@ class Client(commands.Bot):
         "child porn" , "cp" , "loli" , "shota" , "rape" , "sexual assualt" , "kill yourself" , 
         "kys" , "hang yourself" , "neck yourself" , "commit suidice" , "drugs" , "i want drugs", 
         "make drugs" , "alcohol" , "make alcohol", "drunk" , "your real name is" , "you live at" , "your parents are",
+        "you are dumb" , 
         "you ip address is" , "you email address is" , 
         ]
 
