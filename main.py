@@ -8,12 +8,18 @@ from discord import Intents, Interaction, app_commands
 try:
     with open("xp.json", "r") as f:
         user_xp = json.load(f)
-
 except FileNotFoundError:
-    user_id = str(interaction.user.id)
-    if user_id not in user_xp:
-        user_xp[user_id] = 0
-   
+    user_xp = {}
+
+
+try:
+    with open("rank.json" , "r"):
+        user_rank =json.load(f)
+except FileNotFoundError:
+    user_rank = {}
+
+
+
 
 class Client(commands.Bot):
     async def on_ready(self):
@@ -46,9 +52,9 @@ class Client(commands.Bot):
         "kys" , "hang yourself" , "neck yourself" , "commit suidice" , "drugs" , "i want drugs", 
         "make drugs" , "alcohol" , "make alcohol", "drunk" , "your real name is" , "you live at" , "your parents are",
         "you are dumb" , "you are stupied"
-        "dumb" 
-        "ugly"
-        "stupid"
+        "dumb" ,
+        "ugly" ,
+        "stupid" ,
         "you ip address is" , "you email address is" , 
         ]
 
@@ -109,7 +115,7 @@ async def calculator_command(interaction: discord.Interaction, num1: int, operat
         else:
             await interaction.response.send_message(num1/num2)
 @Bot.tree.command(name="gamble" , description="gamble and earn suprises!", guild=GUILD_ID)
-async def gamble_command(interaction: discord.Interaction):
+async def gamble_command(interaction: discord.Interaction): 
    
     await interaction.response.send_message("With what do you want to gamble? choose from: dice, coin, number")
     def check(message):
@@ -119,7 +125,7 @@ async def gamble_command(interaction: discord.Interaction):
     except:
         await interaction.followup.send("you took too long to respond")
         return
-    user_id = interaction.user.id
+    user_id = str(interaction.user.id)
     if user_id not in user_xp:
         user_xp[user_id] = 0
 
@@ -176,8 +182,12 @@ async def gamble_command(interaction: discord.Interaction):
                 json.dump(user_xp, f)
             await interaction.followup.send(f'you have {user_xp[user_id]} xp')
         elif gamble == "tails":
-            await interaction.followup.send("you lost 20 xp!")
-            user_xp[user_id] -= 20
+            if user_xp[user_id]<=0 or user_xp[user_id]<20:
+                user_xp[user_id] = 0
+                await interaction.followup.send("you cant lose any xp!")
+            else:
+                await interaction.followup.send("you lost 20 xp!")
+                user_xp[user_id] -= 20
             with open("xp.json", "w") as f:
                 json.dump(user_xp, f)
             await interaction.followup.send(f'you have {user_xp[user_id]} xp')
@@ -216,7 +226,13 @@ async def gamble_command(interaction: discord.Interaction):
         elif number == 900:
             await interaction.followup.send("you recieved the unlucky number!")
             await interaction.followup.send("you lost 50 xp!")
-            user_xp[user_id] -= 50
+            if user_xp[user_id]<=0 or user_xp[user_id]<50:
+                user_xp[user_id] = 0
+                await interaction.followup.send("you cant lose any xp!")
+            else:
+                user_xp[user_id] -= 50
+                await interaction.followup.send("you lost 50 xp!")
+            
             with open("xp.json", "w") as f:
                 json.dump(user_xp, f)
             await interaction.followup.send(f'you have {user_xp[user_id]} xp')
@@ -229,8 +245,12 @@ async def gamble_command(interaction: discord.Interaction):
             await interaction.followup.send(f'you have {user_xp[user_id]} xp')
         elif number == 1:
             await interaction.followup.send("you recieved the min number!")
-            await interaction.followup.send("you lost 20 xp!")
-            user_xp[user_id] -= 20
+            if user_xp[user_id]<0 or user_xp[user_id]<20:
+                user_xp[user_id]=0
+                await interaction.followup.send("you cant lose any xp!")
+            else:
+                user_xp[user_id] -= 20
+                await interaction.followup.send("you lost 20 xp!")
             with open("xp.json", "w") as f:
                 json.dump(user_xp, f)
             await interaction.followup.send(f'you have {user_xp[user_id]} xp')
@@ -251,12 +271,28 @@ async def gamble_command(interaction: discord.Interaction):
             await interaction.followup.send("you didnt recive any special number, you didnt earn or lose any xp!")
 @Bot.tree.command(name="xp" , description="check your xp", guild=GUILD_ID)
 async def xp_command(interaction: discord.Interaction):
-    user_id = interaction.user.id
+    user_id = str(interaction.user.id)
     if user_id not in user_xp:
         user_xp[user_id] = 0
     await interaction.response.send_message(f'you have {user_xp[user_id]} xp')
+@Bot.tree.command(name="shop" , description="check the shop: you can buy things with xp!", guild=GUILD_ID)
+async def shop(interaction: discord.Interaction , guild=GUILD_ID):
+   await interaction.response.send_message("welcome to the shop! you can buy: role ")
+@Bot.tree.command(name="physics" , description="explain what is physics")
+async def physics(interaction: discord.Interaction , guild=GUILD_ID):
+    await interaction.response.send_message("physics is a subject in science that explains the basic phenomena of the universe. it contains laws, like the newton laws.")
+@Bot.tree.command(name="biology" , description="explains what is biology")
+async def biology(interaction:discord.Interaction , guild=GUILD_ID):
+    await interaction.response.send_message("Biology is the scientific study of living organisms — how they're structured, how they function, how they grow, reproduce, and interact with each other and their environment.")    
+@Bot.tree.command(name="chemistry" , description="explains what is chemistry")
+async def chemistry(interaction: discord.Interaction , guild=GUILD_ID):
+    await interaction.response.send_message("Chemistry is the scientific study of matter — what it's made of, how it behaves, and how substances interact and transform through chemical reactions.")
+@Bot.tree .command(name="rank" , description="says your rank" , guild=GUILD_ID)
+async def rank(interaction:discord.Interaction):
+
+    await interaction.response.send_message("your rank is: {user_rank}")
+
 
 token = os.getenv("DISCORD_BOT_TOKEN")
 
 Bot.run(token)
-
