@@ -26,7 +26,7 @@ This is a single-file Discord bot (`main.py`) built with `discord.py` using the 
 - `/gamble` — XP gambling via dice/coin/number sub-choices (10s message wait)
 - `/xp` — shows user's current XP
 - `/shop` — stub, not yet implemented
-- `/rank` — stub, not yet implemented (has a bug: uses `{user_rank}` instead of `f-string`)
+- `/rank` — stub, not yet implemented
 
 **XP persistence:** Every XP change writes the full `user_xp` dict back to `xp.json` immediately.
 
@@ -34,7 +34,5 @@ This is a single-file Discord bot (`main.py`) built with `discord.py` using the 
 
 ## Known Issues / Bugs
 
-- `rank.json` loading uses `f` before it is defined (line 17) — will silently fall back to `{}` via the except, but the intent was to load rank data
-- `/rank` command uses `{user_rank}` without an `f` prefix, so it always prints the literal string
-- `/shop` and `/physics`/`biology`/`chemistry` pass `guild=GUILD_ID` as a keyword arg to the function signature instead of to the decorator — this is a parameter mismatch
-- The bot token was committed in `.vscode/launch.json` — that token should be rotated
+- `/shop` and `/rank` are stubs with no implementation yet
+- **Moderation enforcement is disabled:** `warn_words` and `instant_ban_words` lists exist but the enforcement logic in `on_message` is commented out
