@@ -3,7 +3,7 @@ import discord
 GUILD_ID = discord.Object(id=1468209555761532980)
 
 
-def setup(bot, user_xp, user_rank):
+def setup(bot, user_xp, user_rank, rank_advance):
     @bot.tree.command(name="xp", description="check your xp", guild=GUILD_ID)
     async def xp_command(interaction: discord.Interaction):
         user_id = str(interaction.user.id)
@@ -17,4 +17,6 @@ def setup(bot, user_xp, user_rank):
 
     @bot.tree.command(name="rank", description="says your rank", guild=GUILD_ID)
     async def rank(interaction: discord.Interaction):
-        await interaction.response.send_message(f"your rank is: {user_rank}")
+        user_id = str(interaction.user.id)
+        await interaction.response.send_message(f"your rank is: {user_rank.get(user_id, 0)}")
+    

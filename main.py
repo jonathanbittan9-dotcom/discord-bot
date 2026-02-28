@@ -18,6 +18,11 @@ try:
         user_rank = json.load(f)
 except FileNotFoundError:
     user_rank = {}
+try:
+    with open("rank_advance" , "r") as f:
+        rank_advance = json.load(f)
+except:
+    rank_advance = {}
 
 
 class Client(commands.Bot):
@@ -31,7 +36,7 @@ class Client(commands.Bot):
         msg_content = message.content.lower()
         warn_words = [
         "fuck", "shit", "damn", "bitch" ,"ass" , "hell" , "crap" , "bastard" , "piss" , "whore" ,
-        "slut" ,"cunt" , "retard" , "retarded" ,"fag" , "faggot" , "nigger" , "nigga" , "tranny" , "cancer"
+        "slut" ,"cunt" , "retard" , "retarded" ,"fag" , "faggot" , "nigger" , "nigga" , "tranny" , "cancer",
         "die" , "died",
         "chink" ,"spic" , "kike" , "wetback" , "discord.gg" , "http://" , "https://" , "www." ,"bit.ly",
         "tinyurl" , ".com" , ".net" , ".org" , "kys" , "kill yourself" , "neck yourself" , "loser" , "idiot" ,
@@ -47,7 +52,7 @@ class Client(commands.Bot):
         "child porn" , "cp" , "loli" , "shota" , "rape" , "sexual assualt" , "kill yourself" ,
         "kys" , "hang yourself" , "neck yourself" , "commit suidice" , "drugs" , "i want drugs",
         "make drugs" , "alcohol" , "make alcohol", "drunk" , "your real name is" , "you live at" , "your parents are",
-        "you are dumb" , "you are stupied"
+        "you are dumb" , "you are stupied",
         "dumb" ,
         "ugly" ,
         "stupid" ,
@@ -71,8 +76,8 @@ Bot = Client(command_prefix='!', intents=intents)
 GUILD_ID = discord.Object(id=1468209555761532980)
 
 info.setup(Bot)
-games.setup(Bot, user_xp)
-xp_commands.setup(Bot, user_xp, user_rank)
+games.setup(Bot, user_xp , rank_advance , user_rank)
+xp_commands.setup(Bot, user_xp, user_rank , rank_advance)
 
 token = os.getenv("DISCORD_BOT_TOKEN")
 Bot.run(token)
