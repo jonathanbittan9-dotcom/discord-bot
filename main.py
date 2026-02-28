@@ -13,7 +13,7 @@ except FileNotFoundError:
 
 
 try:
-    with open("rank.json" , "r"):
+    with open("rank.json", "r") as f:
         user_rank =json.load(f)
 except FileNotFoundError:
     user_rank = {}
