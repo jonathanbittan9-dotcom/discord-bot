@@ -276,21 +276,21 @@ async def xp_command(interaction: discord.Interaction):
         user_xp[user_id] = 0
     await interaction.response.send_message(f'you have {user_xp[user_id]} xp')
 @Bot.tree.command(name="shop" , description="check the shop: you can buy things with xp!", guild=GUILD_ID)
-async def shop(interaction: discord.Interaction , guild=GUILD_ID):
+async def shop(interaction: discord.Interaction):
    await interaction.response.send_message("welcome to the shop! you can buy: role ")
-@Bot.tree.command(name="physics" , description="explain what is physics")
-async def physics(interaction: discord.Interaction , guild=GUILD_ID):
+@Bot.tree.command(name="physics" , description="explain what is physics", guild=GUILD_ID)
+async def physics(interaction: discord.Interaction):
     await interaction.response.send_message("physics is a subject in science that explains the basic phenomena of the universe. it contains laws, like the newton laws.")
-@Bot.tree.command(name="biology" , description="explains what is biology")
-async def biology(interaction:discord.Interaction , guild=GUILD_ID):
-    await interaction.response.send_message("Biology is the scientific study of living organisms — how they're structured, how they function, how they grow, reproduce, and interact with each other and their environment.")    
-@Bot.tree.command(name="chemistry" , description="explains what is chemistry")
-async def chemistry(interaction: discord.Interaction , guild=GUILD_ID):
+@Bot.tree.command(name="biology" , description="explains what is biology", guild=GUILD_ID)
+async def biology(interaction:discord.Interaction):
+    await interaction.response.send_message("Biology is the scientific study of living organisms — how they're structured, how they function, how they grow, reproduce, and interact with each other and their environment.")
+@Bot.tree.command(name="chemistry" , description="explains what is chemistry", guild=GUILD_ID)
+async def chemistry(interaction: discord.Interaction):
     await interaction.response.send_message("Chemistry is the scientific study of matter — what it's made of, how it behaves, and how substances interact and transform through chemical reactions.")
 @Bot.tree .command(name="rank" , description="says your rank" , guild=GUILD_ID)
 async def rank(interaction:discord.Interaction):
 
-    await interaction.response.send_message("your rank is: {user_rank}")
+    await interaction.response.send_message(f"your rank is: {user_rank}")
 
 
 token = os.getenv("DISCORD_BOT_TOKEN")
