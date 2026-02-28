@@ -1,6 +1,7 @@
 import discord
 import random
 import json
+#continue to develop the rank system in gamble command
 
 GUILD_ID = discord.Object(id=1468209555761532980)
 
