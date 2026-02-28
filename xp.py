@@ -1,4 +1,5 @@
 import discord
+import json
 
 GUILD_ID = discord.Object(id=1468209555761532980)
 
@@ -19,4 +20,18 @@ def setup(bot, user_xp, user_rank, rank_advance):
     async def rank(interaction: discord.Interaction):
         user_id = str(interaction.user.id)
         await interaction.response.send_message(f"your rank is: {user_rank.get(user_id, 0)}")
-    
+    @bot.tree.command(name="resetxp" , description="resets your xp(it also resets your rank: so be carefull)" , guild=GUILD_ID)
+    async def resetxp(interaction: discord.Interaction):
+        user_id = str(interaction.user.id)
+        user_xp[user_id] = 0
+        user_rank[user_id] = 0
+        rank_advance[user_id] = 50
+        with open("xp.json" , "w") as f:
+            json.dump(user_xp , f)
+        with open("rank.json" , "w") as f:
+            json.dump(user_rank , f)
+        with open("rank_advance" , "w") as f:
+            json.dump(rank_advance , f)
+        await interaction.response.send_message(f'you xp in now reset to: {user_xp[user_id]}')
+        await interaction.followup.send(f'you rank is also resets to:{user_rank[user_id]}')
+        

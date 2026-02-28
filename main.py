@@ -10,13 +10,13 @@ import xp as xp_commands
 try:
     with open("xp.json", "r") as f:
         user_xp = json.load(f)
-except FileNotFoundError:
+except (FileNotFoundError, json.JSONDecodeError):
     user_xp = {}
 
 try:
     with open("rank.json", "r") as f:
         user_rank = json.load(f)
-except FileNotFoundError:
+except (FileNotFoundError, json.JSONDecodeError):
     user_rank = {}
 try:
     with open("rank_advance" , "r") as f:
@@ -67,6 +67,8 @@ class Client(commands.Bot):
         #         json.dump(Warning_user, f)
         #     if Warning_user == 5:
         #     #remember to generate the ban here
+
+        await self.process_commands(message)
 
 
 intents = discord.Intents.default()
