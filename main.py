@@ -5,6 +5,7 @@ from discord.ext import commands
 
 import info
 import games
+import jokes
 import xp as xp_commands
 
 try:
@@ -80,6 +81,7 @@ GUILD_ID = discord.Object(id=1468209555761532980)
 info.setup(Bot)
 games.setup(Bot, user_xp , rank_advance , user_rank)
 xp_commands.setup(Bot, user_xp, user_rank , rank_advance)
+jokes.setup(Bot)
 
 token = os.getenv("DISCORD_BOT_TOKEN")
 Bot.run(token)

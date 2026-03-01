@@ -4,6 +4,7 @@ GUILD_ID = discord.Object(id=1468209555761532980)
 
 
 def setup(bot):
+
     @bot.tree.command(name="serverhelp", description="decribes what is the server about", guild=GUILD_ID)
     async def help_command(interaction: discord.Interaction):
         await interaction.response.send_message("This server is about steam games and the stem peogram")
@@ -27,3 +28,7 @@ def setup(bot):
     @bot.tree.command(name="chemistry", description="explains what is chemistry", guild=GUILD_ID)
     async def chemistry(interaction: discord.Interaction):
         await interaction.response.send_message("Chemistry is the scientific study of matter — what it's made of, how it behaves, and how substances interact and transform through chemical reactions.")
+    @bot.tree.command(name="science", description="explains what is science", guild=GUILD_ID)
+    async def science(interaction:discord.Interaction):
+        await interaction.response.send_message("Science is a systematic method of understanding the natural world through observation, experimentation, and evidence-based reasoning.")
+

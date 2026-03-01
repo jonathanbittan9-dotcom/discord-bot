@@ -1,7 +1,6 @@
 import discord
 import random
 import json
-#continue to develop the rank system in gamble command
 
 GUILD_ID = discord.Object(id=1468209555761532980)
 
@@ -38,7 +37,7 @@ def setup(bot, user_xp, rank_advance, user_rank):
         except:
             await interaction.followup.send("you took too long to respond")
             return
-
+    
         user_id = str(interaction.user.id)
         if user_id not in user_xp:
             user_xp[user_id] = 0
