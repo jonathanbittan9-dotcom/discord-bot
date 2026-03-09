@@ -8,4 +8,6 @@ def setup(bot):
     @bot.tree.command(name="hate" , description="i hate you lol" , guild=GUILD_ID)
     async def hate(interaaction: discord.Interaction):
         await interaaction.response.send_message("https://tenor.com/view/i-hate-you-anakin-star-wars-gif-10358450")
-
+    @bot.tree.command(name="lol" , description="lol" , guild=GUILD_ID)
+    async def lol(interaction: discord.Interaction):
+        await interaction.response.send_message("https://discord.com/channels/@me/1451235592145866999/1480236786734202981")
