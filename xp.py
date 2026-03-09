@@ -30,7 +30,7 @@ def setup(bot, user_xp, user_rank, rank_advance):
             json.dump(user_xp , f)
         with open("rank.json" , "w") as f:
             json.dump(user_rank , f)
-        with open("rank_advance" , "w") as f:
+        with open("rank_advance.json" , "w") as f:
             json.dump(rank_advance , f)
         await interaction.response.send_message(f'you xp in now reset to: {user_xp[user_id]}')
         await interaction.followup.send(f'you rank is also resets to:{user_rank[user_id]}')

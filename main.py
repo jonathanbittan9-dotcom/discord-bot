@@ -6,6 +6,7 @@ from discord.ext import commands
 import info
 import games
 import jokes
+import chat
 import xp as xp_commands
 
 try:
@@ -20,7 +21,7 @@ try:
 except (FileNotFoundError, json.JSONDecodeError):
     user_rank = {}
 try:
-    with open("rank_advance" , "r") as f:
+    with open("rank_advance.json" , "r") as f:
         rank_advance = json.load(f)
 except:
     rank_advance = {}
@@ -82,6 +83,11 @@ info.setup(Bot)
 games.setup(Bot, user_xp , rank_advance , user_rank)
 xp_commands.setup(Bot, user_xp, user_rank , rank_advance)
 jokes.setup(Bot)
+chat.setup(Bot)
 
 token = os.getenv("DISCORD_BOT_TOKEN")
+if not token:
+    print("ERROR: DISCORD_BOT_TOKEN environment variable is not set.")
+    print("Run: export DISCORD_BOT_TOKEN=\"your_token_here\"")
+    exit(1)
 Bot.run(token)

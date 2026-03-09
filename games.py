@@ -53,7 +53,7 @@ def setup(bot, user_xp, rank_advance, user_rank):
                 await interaction.followup.send(f"you advanced to rank {user_rank[user_id]}!")
                 with open("rank.json", "w") as f:
                     json.dump(user_rank, f)
-                with open("rank_advance", "w") as f:
+                with open("rank_advance.json", "w") as f:
                     json.dump(rank_advance, f)
 
         if msg.content == "dice":

@@ -31,4 +31,3 @@ def setup(bot):
     @bot.tree.command(name="science", description="explains what is science", guild=GUILD_ID)
     async def science(interaction:discord.Interaction):
         await interaction.response.send_message("Science is a systematic method of understanding the natural world through observation, experimentation, and evidence-based reasoning.")
-
