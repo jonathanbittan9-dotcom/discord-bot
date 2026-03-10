@@ -19,6 +19,10 @@ def setup(Bot):
 
     async def answers(interaction: discord.Interaction, msg):
         if msg.content.lower() == "bruh":
-            await interaction.followup.send("bruh moment detected 💀")
+            await interaction.followup.send("why? what is the problem?")
+            if msg.content.lower() == "you are weird":
+                await interaction.followup.send("alright alright i will stop")
+                await interaction.followup.send("i can help on the server: tell me what is the problem and i will help you.")
+                
         else:
             await interaction.followup.send(f"You said: {msg.content}")
